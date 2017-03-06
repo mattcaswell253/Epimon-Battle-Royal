@@ -41,24 +41,26 @@ namespace Epimon
             }
         }
         public int GetId()
-       {
-           return _id;
-       }
-       public string GetType()
+        {
+            return _id;
+        }
+        public string GetType()
         {
             return _type;
         }
         public void SetType(string newType)
         {
             _type = newType;
-        }public string GetName()
+        }
+        public string GetName()
         {
             return _name;
         }
         public void SetName(string newName)
         {
             _name = newName;
-        }public int GetHealth()
+        }
+        public int GetHealth()
         {
             return _health;
         }
@@ -73,7 +75,8 @@ namespace Epimon
         public void SetAttack(int newAttack)
         {
             _attack = newAttack;
-        }public int GetSpeed()
+        }
+        public int GetSpeed()
         {
             return _speed;
         }
@@ -89,56 +92,56 @@ namespace Epimon
             SqlConnection conn = DB.Connection();
             conn.Open();
 
-            Sqlcommand cmd = new Sqlcommand("SELECT * FROM characters;", conn);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM characters;", conn);
             SqlDataReader rdr = cmd.ExecuteReader();
 
             while(rdr.Read())
             {
-              int characterId = rdr.GetInt32(0);
-              string characterType = rdr.GetString(1);
-              string characterName = rdr.GetString(2);
-              int characterHealth = rdr.GetInt32(3);
-              int characterAttack = rdr.GetInt32(4);
-              int characterSpeed = rdr.GetInt32(5);
+                int characterId = rdr.GetInt32(0);
+                string characterType = rdr.GetString(1);
+                string characterName = rdr.GetString(2);
+                int characterHealth = rdr.GetInt32(3);
+                int characterAttack = rdr.GetInt32(4);
+                int characterSpeed = rdr.GetInt32(5);
 
-              Character newCharacter = new Character(characterType, characterName, characterHealth, characterHealth, characterSpeed, characterId);
-              allCharacters.Add(newCharacter);
+                Character newCharacter = new Character(characterType, characterName, characterHealth, characterHealth, characterSpeed, characterId);
+                allCharacters.Add(newCharacter);
             }
 
             if(rdr != null)
             {
-              rdr.Close();
+                rdr.Close();
             }
             if(conn != null)
             {
-              conn.Close();
+                conn.Close();
             }
             return allCharacters;
 
-          }
-            public void Save()
-          {
-              SqlConnection conn = DB.Connection();
-              conn.Open();
+        }
+        public void Save()
+        {
+            SqlConnection conn = DB.Connection();
+            conn.Open();
 
-              SqlCommand cmd = new SqlCommand("INSERT INTO characters(type, name, health, attack, speed) OUTPUT INSERTED.id VALUES (@CharacterType, @CharacterName, @CharacterHealth, @CharacterAttack, @CharacterSpeed)", conn);
+            SqlCommand cmd = new SqlCommand("INSERT INTO characters(type, name, health, attack, speed) OUTPUT INSERTED.id VALUES (@CharacterType, @CharacterName, @CharacterHealth, @CharacterAttack, @CharacterSpeed)", conn);
 
-              SqlParameter typeParameter = new SqlParameter("@CharacterType", this.GetType());
-              cmd.Parameters.Add(typeParameter);
+            SqlParameter typeParameter = new SqlParameter("@CharacterType", this.GetType());
+            cmd.Parameters.Add(typeParameter);
 
-              SqlParameter nameParameter = new SqlParameter("@CharacterName", this.GetName());
-              cmd.Parameters.Add(nameParameter);
+            SqlParameter nameParameter = new SqlParameter("@CharacterName", this.GetName());
+            cmd.Parameters.Add(nameParameter);
 
-              SqlParameter healthParameter = new SqlParameter("@CharacterHealth", this.GetHealth());
-              cmd.Parameters.Add(healthParameter);
+            SqlParameter healthParameter = new SqlParameter("@CharacterHealth", this.GetHealth());
+            cmd.Parameters.Add(healthParameter);
 
-              SqlParameter attackParameter = new SqlParameter("@CharacterAttack", this.GetAttack());
-              cmd.Parameters.Add(attackParameter);
+            SqlParameter attackParameter = new SqlParameter("@CharacterAttack", this.GetAttack());
+            cmd.Parameters.Add(attackParameter);
 
-              SqlParameter speedParameter = new SqlParameter("@CharacterSpeed", this.GetSpeed());
-              cmd.Parameters.Add(speedParameter);
+            SqlParameter speedParameter = new SqlParameter("@CharacterSpeed", this.GetSpeed());
+            cmd.Parameters.Add(speedParameter);
 
-              SqlDataReader rdr = cmd.ExecuteReader();
+            SqlDataReader rdr = cmd.ExecuteReader();
 
 
             while(rdr.Read())
@@ -154,8 +157,57 @@ namespace Epimon
                 conn.Close();
             }
         }
+        public static Character Find(int id)
+        {
+            SqlConnection conn = DB.Connection();
+            conn.Open();
 
-          }
+            SqlCommand cmd = new SqlCommand("SELECT * FROM characters WHERE id = @CharacterId", conn);
 
+            SqlParameter characterIdParameter = new SqlParameter("@CharacterId", id.ToString());
+            cmd.Parameters.Add(characterIdParameter);
 
+            SqlDataReader rdr = cmd.ExecuteReader();
+
+            int foundCharacterId = 0;
+            string foundCharacterType = null;
+            string foundCharacterName = null;
+            int foundCharacterHealth = 0;
+            int foundCharacterAttack = 0;
+            int foundCharacterSpeed = 0;
+
+            while(rdr.Read())
+            {
+                foundCharacterId = rdr.GetInt32(0);
+                foundCharacterType = rdr.GetString(1);
+                foundCharacterName = rdr.GetString(2);
+                foundCharacterHealth = rdr.GetInt32(3);
+                foundCharacterAttack = rdr.GetInt32(4);
+                foundCharacterSpeed = rdr.GetInt32(5);
+            }
+
+            Character foundCharacter = new Character(foundCharacterType, foundCharacterName, foundCharacterHealth, foundCharacterAttack, foundCharacterSpeed, foundCharacterId);
+
+            if (rdr != null)
+            {
+                rdr.Close();
+            }
+            if (conn != null)
+            {
+                conn.Close();
+            }
+            return foundCharacter;
         }
+
+        public static void DeleteAll()
+        {
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("DELETE FROM characters;", conn);
+            cmd.ExecuteNonQuery();
+            conn.Close();
+        }
+    }
+
+
+}
