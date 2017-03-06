@@ -10,6 +10,10 @@ namespace Epimon
     {
         public static Move generalMove1 = new Move("tackle" ,"normal", 10);
         public static Move generalMove2 = new Move("tackle" ,"normal", 10);
+<<<<<<< HEAD
+=======
+        public static Character firstCharacter = new Character("Fish", "Gyrados", 5, 5, 5);
+>>>>>>> 0d98e4387d724b0be61dd6909ae83264bc4690af
 
 
         public MoveTest()
@@ -64,7 +68,7 @@ namespace Epimon
         }
 
         [Fact]
-        public void Test_Find_FindsMoveInDatablase()
+        public void Test_Find_FindsMoveInDatabase()
         {
             //Arrange
             generalMove1.Save();
@@ -75,13 +79,27 @@ namespace Epimon
             Assert.Equal(generalMove1, foundMove);
         }
 
+        [Fact]
+        public void Test_GetCharacters_ReturnAllCharactersInMove()
+        {
+            // Arragne
+            generalMove1.Save();
+            firstCharacter.Save();
 
+            // Act
+            generalMove1.AddCharacter(firstCharacter);
+            List<Character> savedCharacter = generalMove1.GetCharacters();
+            List<Character> testList = new List<Character> {firstCharacter};
 
+            // Assert
+            Assert.Equal(testList, savedCharacter);
+        }
 
         public void Dispose()
         {
             Move.DeleteAll();
             Character.DeleteAll();
+
         }
     }
 }

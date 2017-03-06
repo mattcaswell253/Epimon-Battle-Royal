@@ -128,6 +128,57 @@ namespace Epimon
             return foundMove;
         }
 
+        public void AddCharacter(Character newCharacter)
+        {
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("INSERT INTO characters_moves (character_id, move_id) VALUES (@CharacterId, @MoveId);", conn);
+            SqlParameter characterIdParameter = new SqlParameter("@CharacterId", newCharacter.GetId());
+            SqlParameter moveIdParameter = new SqlParameter("@MoveId", this.GetMoveId());
+            cmd.Parameters.Add(characterIdParameter);
+            cmd.Parameters.Add(moveIdParameter);
+
+            cmd.ExecuteNonQuery();
+            if(conn != null)
+            {
+                conn.Close();
+            }
+        }
+
+        public List<Character> GetCharacters()
+        {
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("SELECT characters.* FROM moves JOIN characters_moves ON (moves.id = characters_moves.move_id) JOIN characters ON (characters_moves.character_id = characters.id) WHERE moves.id = @MoveId;", conn);
+            SqlParameter characterMove = new SqlParameter("@MoveId", this.GetMoveId().ToString());
+            cmd.Parameters.Add(characterMove);
+            SqlDataReader rdr = cmd.ExecuteReader();
+
+            List<Character> newList = new List<Character>{};
+            while(rdr.Read())
+            {
+                int characterId = rdr.GetInt32(0);
+                string characterType = rdr.GetString(1);
+                string characterName = rdr.GetString(2);
+                int characterHealth = rdr.GetInt32(3);
+                int characterAttack = rdr.GetInt32(4);
+                int characterSpeed = rdr.GetInt32(5);
+
+                Character newCharacter = new Character(characterType, characterName, characterHealth, characterAttack, characterSpeed, characterId);
+                newList.Add(newCharacter);
+            }
+            if(rdr != null)
+            {
+                rdr.Close();
+            }
+            if(conn != null)
+            {
+                conn.Close();
+            }
+             return newList;
+        }
+
         public static void DeleteAll()
         {
             SqlConnection conn = DB.Connection();
