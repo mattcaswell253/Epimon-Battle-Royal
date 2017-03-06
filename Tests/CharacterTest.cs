@@ -43,9 +43,28 @@ namespace Epimon
             //Assert
             Assert.Equal(firstCharacter, result);
         }
+        [Fact]
+        public void Test_AddGetMove_AddsMoveToCharacterThenGets()
+        {
+            //Arrange
+            Character testCharacter = new Character("Fish", "Gyrados", 5, 5, 5);
+            testCharacter.Save();
+
+            Move testMove = new Move("tackle" ,"normal", 10);
+            testMove.Save();
+
+            //Act
+            testCharacter.AddMove(testMove);
+
+            List<Move> result = testCharacter.GetMoves();
+            List<Move> testList = new List<Move>{testMove};
+
+            //Assert
+            Assert.Equal(testList, result);
+        }
         public void Dispose()
-       {
-           Character.DeleteAll();
-       }
+        {
+            Character.DeleteAll();
+        }
     }
 }
