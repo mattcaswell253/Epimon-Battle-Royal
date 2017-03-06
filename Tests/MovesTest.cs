@@ -79,12 +79,12 @@ namespace Epimon
         public void Test_GetCharacters_ReturnAllCharactersInMove()
         {
             // Arragne
-            firstMove.Save();
+            generalMove1.Save();
             firstCharacter.Save();
 
             // Act
-            firstMove.AddCharacter(firstCharacter);
-            List<Character> savedCharacter = firstMove.GetCharacters();
+            generalMove1.AddCharacter(firstCharacter);
+            List<Character> savedCharacter = generalMove1.GetCharacters();
             List<Character> testList = new List<Character> {firstCharacter};
 
             // Assert
