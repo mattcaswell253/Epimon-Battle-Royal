@@ -75,8 +75,21 @@ namespace Epimon
             Assert.Equal(generalMove1, foundMove);
         }
 
+        [Fact]
+        public void Test_GetCharacters_ReturnAllCharactersInMove()
+        {
+            // Arragne
+            firstMove.Save();
+            firstCharacter.Save();
 
+            // Act
+            firstMove.AddCharacter(firstCharacter);
+            List<Character> savedCharacter = firstMove.GetCharacters();
+            List<Character> testList = new List<Character> {firstCharacter};
 
+            // Assert
+            Assert.Equal(testList, savedCharacter);
+        }
 
         public void Dispose()
         {
