@@ -10,11 +10,7 @@ namespace Epimon
     {
         public static Move generalMove1 = new Move("tackle" ,"normal", 10);
         public static Move generalMove2 = new Move("tackle" ,"normal", 10);
-<<<<<<< HEAD
-=======
         public static Character firstCharacter = new Character("Fish", "Gyrados", 5, 5, 5);
->>>>>>> 0d98e4387d724b0be61dd6909ae83264bc4690af
-
 
         public MoveTest()
         {
