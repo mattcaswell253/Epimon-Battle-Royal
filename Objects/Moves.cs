@@ -134,7 +134,7 @@ namespace Epimon
             conn.Open();
 
             SqlCommand cmd = new SqlCommand("INSERT INTO characters_moves (character_id, move_id) VALUES (@CharacterId, @MoveId);", conn);
-            SqlParameter characterIdParameter = new SqlParameter("@CharacterId", newCharacter.GetCharacterId());
+            SqlParameter characterIdParameter = new SqlParameter("@CharacterId", newCharacter.GetId());
             SqlParameter moveIdParameter = new SqlParameter("@MoveId", this.GetMoveId());
             cmd.Parameters.Add(characterIdParameter);
             cmd.Parameters.Add(moveIdParameter);
@@ -165,7 +165,7 @@ namespace Epimon
                 int characterAttack = rdr.GetInt32(4);
                 int characterSpeed = rdr.GetInt32(5);
 
-                Character newCharacter = new Character(characterType, characterName, chraracterHealth, characterAttack, characterSpeed, characterId);
+                Character newCharacter = new Character(characterType, characterName, characterHealth, characterAttack, characterSpeed, characterId);
                 newList.Add(newCharacter);
             }
             if(rdr != null)
