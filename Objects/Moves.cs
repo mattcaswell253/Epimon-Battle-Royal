@@ -93,6 +93,41 @@ namespace Epimon
            }
        }
 
+       public static Move Find(int id)
+        {
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("SELECT * FROM moves WHERE id = @MoveId;", conn);
+            SqlParameter MoveIdParameter = new SqlParameter("@MoveId", id.ToString());
+            cmd.Parameters.Add(MoveIdParameter);
+
+            SqlDataReader rdr = cmd.ExecuteReader();
+            int foundMoveId = 0;
+            string foundMoveName = null;
+            string foundMoveType = null;
+            int foundMoveDmg = 0;
+
+            while(rdr.Read())
+            {
+                foundMoveId = rdr.GetInt32(0);
+                foundMoveName = rdr.GetString(1);
+                foundMoveType = rdr.GetString(2);
+                foundMoveDmg = rdr.GetInt32(3);
+            }
+            Move foundMove = new Move(foundMoveName, foundMoveType, foundMoveDmg, foundMoveId);
+
+            if(rdr != null)
+            {
+                rdr.Close();
+            }
+            if (conn != null)
+            {
+                conn.Close();
+            }
+            return foundMove;
+        }
+
         public static void DeleteAll()
         {
             SqlConnection conn = DB.Connection();

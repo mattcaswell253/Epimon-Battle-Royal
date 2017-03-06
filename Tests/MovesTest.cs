@@ -48,6 +48,33 @@ namespace Epimon
             Assert.Equal(testList, result);
         }
 
+        [Fact]
+        public void Test_SaveAssignsIdToObject()
+        {
+            // Arrange
+            generalMove1.Save();
+
+            // Act
+            Move testMove = Move.GetAllMoves()[0];
+            int result = generalMove1.GetMoveId();
+            int testId = testMove.GetMoveId();
+
+            // Assert
+            Assert.Equal(testId, result);
+        }
+
+        [Fact]
+        public void Test_Find_FindsMoveInDatablase()
+        {
+            //Arrange
+            generalMove1.Save();
+            //Act
+            Move foundMove = Move.Find(generalMove1.GetMoveId());
+
+            //Asswert
+            Assert.Equal(generalMove1, foundMove);
+        }
+
 
 
 
