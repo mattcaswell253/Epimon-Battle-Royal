@@ -198,7 +198,63 @@ namespace Epimon
             }
             return foundCharacter;
         }
+        public void AddMove(Move newMove)
+        {
+            SqlConnection conn = DB.Connection();
+            conn.Open();
 
+
+            SqlCommand cmd = new SqlCommand("INSERT INTO characters_moves (character_id, move_id) VALUES (@CharacterId, @MoveId)", conn);
+
+            SqlParameter characterIdParameter = new SqlParameter("@CharacterId", this.GetId());
+            SqlParameter moveIdParameter = new SqlParameter("@MoveId", newMove.GetMoveId());
+
+            cmd.Parameters.Add(characterIdParameter);
+            cmd.Parameters.Add(moveIdParameter);
+
+            cmd.ExecuteNonQuery();
+
+            if (conn != null);
+            {
+                conn.Close();
+            }
+
+        }
+        public List<Move> GetMoves()
+        {
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("SELECT moves.* FROM characters Join characters_moves ON (characters.id = characters_moves.character_id) JOIN moves ON (characters_moves.move_id = moves.id) WHERE characters.id = @CharacterId;", conn);
+
+            SqlParameter characterIdParameter = new SqlParameter("@CharacterId", this.GetId().ToString());
+
+            cmd.Parameters.Add(characterIdParameter);
+
+            List<Move> moveList = new List<Move> {};
+
+            SqlDataReader rdr = cmd.ExecuteReader();
+
+            while(rdr.Read())
+            {
+                int moveId = rdr.GetInt32(0);
+                string moveName = rdr.GetString(1);
+                string moveType = rdr.GetString(2);
+                int moveDmg = rdr.GetInt32(3);
+
+                Move newMove = new Move(moveName, moveType, moveDmg, moveId);
+                moveList.Add(newMove);
+            }
+            if (rdr != null)
+            {
+                rdr.Close();
+            }
+            if (conn != null)
+            {
+                conn.Close();
+            }
+            return moveList;
+        }
         public static void DeleteAll()
         {
             SqlConnection conn = DB.Connection();
@@ -208,6 +264,4 @@ namespace Epimon
             conn.Close();
         }
     }
-
-
 }
