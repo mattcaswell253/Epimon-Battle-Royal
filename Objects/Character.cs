@@ -35,8 +35,127 @@ namespace Epimon
                 bool typeEquality = this.GetType() == newCharacter.GetType();
                 bool nameEquality = this.GetName() == newCharacter.GetName();
                 bool healthEquality = this.GetHealth() == newCharacter.GetHealth();
-                bool nameEquality = this.GetName() == newCharacter.GetName();
-                bool nameEquality = this.GetName() == newCharacter.GetName();
-                return (idEquality && nameEquality);
+                bool attackEquality = this.GetAttack() == newCharacter.GetAttack();
+                bool speedEquality = this.GetSpeed() == newCharacter.GetSpeed();
+                return (idEquality && typeEquality && nameEquality && healthEquality && attackEquality && speedEquality);
             }
+        }
+        public int GetId()
+       {
+           return _id;
+       }
+       public string GetType()
+        {
+            return _type;
+        }
+        public void SetType(string newType)
+        {
+            _type = newType;
+        }public string GetName()
+        {
+            return _name;
+        }
+        public void SetName(string newName)
+        {
+            _name = newName;
+        }public int GetHealth()
+        {
+            return _health;
+        }
+        public void SetHealth(int newHealth)
+        {
+            _health = newHealth;
+        }
+        public int GetAttack()
+        {
+            return _attack;
+        }
+        public void SetAttack(int newAttack)
+        {
+            _attack = newAttack;
+        }public int GetSpeed()
+        {
+            return _speed;
+        }
+        public void SetSpeed(int newSpeed)
+        {
+            _speed = newSpeed;
+        }
+
+        public static List<Character> GetAll()
+        {
+            List<Character> allCharacters = new List<Character> {};
+
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            Sqlcommand cmd = new Sqlcommand("SELECT * FROM characters;", conn);
+            SqlDataReader rdr = cmd.ExecuteReader();
+
+            while(rdr.Read())
+            {
+              int characterId = rdr.GetInt32(0);
+              string characterType = rdr.GetString(1);
+              string characterName = rdr.GetString(2);
+              int characterHealth = rdr.GetInt32(3);
+              int characterAttack = rdr.GetInt32(4);
+              int characterSpeed = rdr.GetInt32(5);
+
+              Character newCharacter = new Character(characterType, characterName, characterHealth, characterHealth, characterSpeed, characterId);
+              allCharacters.Add(newCharacter);
+            }
+
+            if(rdr != null)
+            {
+              rdr.Close();
+            }
+            if(conn != null)
+            {
+              conn.Close();
+            }
+            return allCharacters;
+
+          }
+            public void Save()
+          {
+              SqlConnection conn = DB.Connection();
+              conn.Open();
+
+              SqlCommand cmd = new SqlCommand("INSERT INTO characters(type, name, health, attack, speed) OUTPUT INSERTED.id VALUES (@CharacterType, @CharacterName, @CharacterHealth, @CharacterAttack, @CharacterSpeed)", conn);
+
+              SqlParameter typeParameter = new SqlParameter("@CharacterType", this.GetType());
+              cmd.Parameters.Add(typeParameter);
+
+              SqlParameter nameParameter = new SqlParameter("@CharacterName", this.GetName());
+              cmd.Parameters.Add(nameParameter);
+
+              SqlParameter healthParameter = new SqlParameter("@CharacterHealth", this.GetHealth());
+              cmd.Parameters.Add(healthParameter);
+
+              SqlParameter attackParameter = new SqlParameter("@CharacterAttack", this.GetAttack());
+              cmd.Parameters.Add(attackParameter);
+
+              SqlParameter speedParameter = new SqlParameter("@CharacterSpeed", this.GetSpeed());
+              cmd.Parameters.Add(speedParameter);
+
+              SqlDataReader rdr = cmd.ExecuteReader();
+
+
+            while(rdr.Read())
+            {
+                this._id = rdr.GetInt32(0);
+            }
+            if (rdr != null)
+            {
+                rdr.Close();
+            }
+            if (conn != null)
+            {
+                conn.Close();
+            }
+        }
+
+          }
+
+
         }
