@@ -13,8 +13,10 @@ namespace Epimon
         private int _health;
         private int _attack;
         private int _speed;
+        private string _img;
 
-        public Character(string Type, string Name, int Health, int Attack, int Speed, int Id = 0)
+
+        public Character(string Type, string Name, int Health, int Attack, int Speed, string img, int Id = 0)
         {
             _id = Id;
             _type = Type;
@@ -22,6 +24,7 @@ namespace Epimon
             _health = Health;
             _attack = Attack;
             _speed = Speed;
+            _img = img;
         }
         public override bool Equals(System.Object otherCharacter)
         {
@@ -57,6 +60,10 @@ namespace Epimon
         {
             return _name;
         }
+        public string GetImg()
+        {
+            return _img;
+        }
         public void SetName(string newName)
         {
             _name = newName;
@@ -86,7 +93,7 @@ namespace Epimon
             _speed = newSpeed;
         }
 
-        public static List<Character> GetAll()
+        public static List<Character> GetAllCharacters()
         {
             List<Character> allCharacters = new List<Character> {};
 
@@ -104,8 +111,10 @@ namespace Epimon
                 int characterHealth = rdr.GetInt32(3);
                 int characterAttack = rdr.GetInt32(4);
                 int characterSpeed = rdr.GetInt32(5);
+                string characterImg = rdr.GetString(6);
 
-                Character newCharacter = new Character(characterType, characterName, characterHealth, characterAttack, characterSpeed, characterId);
+                Character newCharacter = new Character(characterType, characterName, characterHealth, characterAttack, characterSpeed, characterImg, characterId);
+
                 allCharacters.Add(newCharacter);
             }
 
@@ -125,7 +134,7 @@ namespace Epimon
             SqlConnection conn = DB.Connection();
             conn.Open();
 
-            SqlCommand cmd = new SqlCommand("INSERT INTO characters(type, name, health, attack, speed) OUTPUT INSERTED.id VALUES (@CharacterType, @CharacterName, @CharacterHealth, @CharacterAttack, @CharacterSpeed)", conn);
+            SqlCommand cmd = new SqlCommand("INSERT INTO characters(type, name, health, attack, speed, img) OUTPUT INSERTED.id VALUES (@CharacterType, @CharacterName, @CharacterHealth, @CharacterAttack, @CharacterSpeed, @CharacterImg)", conn);
 
             SqlParameter typeParameter = new SqlParameter("@CharacterType", this.GetType());
             cmd.Parameters.Add(typeParameter);
@@ -141,6 +150,9 @@ namespace Epimon
 
             SqlParameter speedParameter = new SqlParameter("@CharacterSpeed", this.GetSpeed());
             cmd.Parameters.Add(speedParameter);
+
+            SqlParameter imgParameter = new SqlParameter("@CharacterImg", this.GetImg());
+            cmd.Parameters.Add(imgParameter);
 
             SqlDataReader rdr = cmd.ExecuteReader();
 
@@ -176,6 +188,7 @@ namespace Epimon
             int foundCharacterHealth = 0;
             int foundCharacterAttack = 0;
             int foundCharacterSpeed = 0;
+            string foundCharacterImg = null;
 
             while(rdr.Read())
             {
@@ -185,9 +198,10 @@ namespace Epimon
                 foundCharacterHealth = rdr.GetInt32(3);
                 foundCharacterAttack = rdr.GetInt32(4);
                 foundCharacterSpeed = rdr.GetInt32(5);
+                foundCharacterImg = rdr.GetString(6);
             }
 
-            Character foundCharacter = new Character(foundCharacterType, foundCharacterName, foundCharacterHealth, foundCharacterAttack, foundCharacterSpeed, foundCharacterId);
+            Character foundCharacter = new Character(foundCharacterType, foundCharacterName, foundCharacterHealth, foundCharacterAttack, foundCharacterSpeed, foundCharacterImg, foundCharacterId);
 
             if (rdr != null)
             {
@@ -274,7 +288,7 @@ namespace Epimon
             int foundCharacterHealth = 0;
             int foundCharacterAttack = 0;
             int foundCharacterSpeed = 0;
-
+            string foundCharacterImg = null;
             while(rdr.Read())
             {
                 foundCharacterId = rdr.GetInt32(0);
@@ -283,12 +297,13 @@ namespace Epimon
                 foundCharacterHealth = rdr.GetInt32(3);
                 foundCharacterAttack = rdr.GetInt32(4);
                 foundCharacterSpeed = rdr.GetInt32(5);
+                foundCharacterImg = rdr.GetString(6);
             }
 
             foundCharacterHealth -= attackMove.GetMoveDmg();
 
-            Character foundCharacter = new Character(foundCharacterType, foundCharacterName, foundCharacterHealth, foundCharacterAttack, foundCharacterSpeed, foundCharacterId);
-            foundCharacter.Save();
+            Character foundCharacter = new Character(foundCharacterType, foundCharacterName, foundCharacterHealth, foundCharacterAttack, foundCharacterSpeed, foundCharacterImg, foundCharacterId);
+
 
             if (rdr != null)
             {

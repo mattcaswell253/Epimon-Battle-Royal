@@ -1,9 +1,23 @@
-body {
+.start-menu {
 
-   background-image: url("/content/img/start-menu1.jpg");
+   background-image: url("/content/img/background2.png");
    background-size: cover;
    background-attachment: fixed;
    /*height: 100%;
    color: white;*/
+   background-repeat: no-repeat;
+}
+
+.character-select {
+
+   background-image: url("/content/img/character-select.jpg");
+   background-size: cover;
+   background-attachment: fixed;
+   height: 100%;
+   color: white;
    background-repeat: no-repeat;;
+}
+
+img {
+    width: 50%;
 }

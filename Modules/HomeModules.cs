@@ -14,11 +14,12 @@ namespace Epimon
             };
 
             Get["/character-select"] = _ => {
-                // Dictionary<string, object> model = new Dictionary<string, object>();
-                List<Character> allCharacters = Character.GetAll();
-                // List<Move> allMoves = Move.GetAllMoves();
-                // model.Add("characters", allCharacters);
-                // model.Add("moves", allMoves);
+
+                // List<Character> allCharacters = Character.GetAll();
+
+
+                List<Character> allCharacters = Character.GetAllCharacters();
+
                 return View["character-select.cshtml", allCharacters];
             };
             Post["/character-selected"] = _ => {
@@ -40,6 +41,7 @@ namespace Epimon
             };
             Post["/attack"] = _ => {
                 Dictionary<string, object> model = new Dictionary<string, object>();
+
                 Character character1 = Character.Find(Request.Form["character1-id"]);
                 Character character2 = Character.Find(Request.Form["character2-id"]);
                 List<Move> character1Moves = character1.GetMoves();
@@ -52,16 +54,15 @@ namespace Epimon
                 model.Add("character2Moves", character2Moves);
                 model.Add("character1Attacked", character1Attacked);
                 model.Add("character2Attacked", character2Attacked);
+
+                
+
                 return View["arena.cshtml", model];
             };
 
 
 
-            // Post["/attack/{}"] = _ => {
-            //     Band band = Band.Find(Request.Form["band-id"]);
-            //     Venue venue = Venue.Find(Request.Form["venue-id"]);
-            //     band.AddVenue(venue);
-            //     return View["success.cshtml"];
+
         }
     }
 }

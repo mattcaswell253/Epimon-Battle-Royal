@@ -1,4 +1,5 @@
-<form action="/character-selected" method="post">
+
+@* <form action="/character-selected" method="post">
 <select id="character1-id" name="character1-id" type="text">
     @foreach (var character in @Model)
     {
@@ -12,4 +13,26 @@
     }
 </select>
 <button type="submit">Add</button>
-</form>
+</form> *@
+
+@{
+    Layout="Shared/_Layout.cshtml";
+}
+
+<body class="character-select">
+    <div class="row">
+        <form class="" action="/arena" method="post">
+            @foreach(var character in Model)
+            {
+                <div class="row">
+                <img src="@character.GetImg()">
+                @character.GetName()
+                <input type="radio" name="player1" value="@character.GetId()">
+                <input type="radio" name="player2" value="@character.GetId()">
+                </div>
+            }
+            <button type="submit" class="btn">Fight!</button>
+        </form>
+    </div>
+
+</body>

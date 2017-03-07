@@ -17,11 +17,11 @@ namespace Epimon
         public void Test_SaveAndGet_SavesAndGetsCharacterObjAndId()
         {
             //Arrange
-            Character firstCharacter = new Character("Fish", "Gyrados", 5, 5, 5);
+            Character firstCharacter = new Character("Fish", "Gyrados", 5, 5, 5, "/content/img/rubydude.png");
             firstCharacter.Save();
 
             //Act
-            Character savedCharacter = Character.GetAll()[0];
+            Character savedCharacter = Character.GetAllCharacters()[0];
 
             int result = savedCharacter.GetId();
             int testId = firstCharacter.GetId();
@@ -34,7 +34,7 @@ namespace Epimon
         public void Test_Find_FindsBandInDatabase()
         {
             //Arrange
-            Character firstCharacter = new Character("Fish", "Gyrados", 5, 5, 5);
+            Character firstCharacter = new Character("Fish", "Gyrados", 5, 5, 5, "/content/img/rubydude.png");
             firstCharacter.Save();
 
             //Act
@@ -47,7 +47,7 @@ namespace Epimon
         public void Test_AddGetMove_AddsMoveToCharacterThenGets()
         {
             //Arrange
-            Character testCharacter = new Character("Fish", "Gyrados", 5, 5, 5);
+            Character testCharacter = new Character("Fish", "Gyrados", 5, 5, 5, "/content/img/rubydude.png");
             testCharacter.Save();
 
             Move testMove = new Move("tackle" ,"normal", 10);
@@ -66,7 +66,7 @@ namespace Epimon
         public void Test_Attack_RemovesHealth()
         {
             //Arrange
-            Character testCharacter = new Character("Fish", "Gyrados", 20, 5, 5);
+            Character testCharacter = new Character("Fish", "Gyrados", 20, 5, 5, "/content/img/rubydude.png");
             testCharacter.Save();
 
             Move testMove = new Move("tackle" ,"normal", 10);
