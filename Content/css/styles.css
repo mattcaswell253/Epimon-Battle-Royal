@@ -10,7 +10,7 @@
 
 .character-select {
 
-   background-image: url("/content/img/character-select.jpg");
+   background-image: url("/content/img/character-select1.jpg");
    background-size: cover;
    background-attachment: fixed;
    height: 100%;
@@ -20,15 +20,23 @@
 }
 
 img {
-    width: 50%;
+    width: 40%;
+}
+
+.character-select{
+    font-family: 'Press Start 2P';
 }
 
 #character-select {
-    font-family: 'Press Start 2P';
     font-size: 5em;
     color: black
 }
 
-.character-name {
-    font-family: 'Press Start 2P';
+.player-select {
+    float: right;
+    margin-right: 30%;
+}
+
+#character-name {
+    font-size: 3em;
 }

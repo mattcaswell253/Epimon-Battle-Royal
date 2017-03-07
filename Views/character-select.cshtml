@@ -26,11 +26,13 @@
             @foreach(var character in Model)
             {
                 <img src="@character.GetImg()">
-                <span class="character-name">@character.GetName()</span>
-                <label class="character-name">Player 1</label>
-                <input type="radio" name="player1" value="@character.GetId()">
-                <label class="character-name">Player 2</label>
-                <input type="radio" name="player2" value="@character.GetId()">
+                <div class="player-select">
+                    <div id="character-name">@character.GetName()</div>
+                    <label>Player 1</label>
+                    <input type="radio" name="player1" value="@character.GetId()">
+                    <label>Player 2</label>
+                    <input type="radio" name="player2" value="@character.GetId()">
+                </div>
             }
             <button type="submit" class="btn">Fight!</button>
         </form>
