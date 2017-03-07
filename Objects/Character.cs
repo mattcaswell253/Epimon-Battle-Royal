@@ -45,7 +45,7 @@ namespace Epimon
         {
             return _id;
         }
-        public string GetType()
+        public string GetCharType()
         {
             return _type;
         }
@@ -105,7 +105,7 @@ namespace Epimon
                 int characterAttack = rdr.GetInt32(4);
                 int characterSpeed = rdr.GetInt32(5);
 
-                Character newCharacter = new Character(characterType, characterName, characterHealth, characterHealth, characterSpeed, characterId);
+                Character newCharacter = new Character(characterType, characterName, characterHealth, characterAttack, characterSpeed, characterId);
                 allCharacters.Add(newCharacter);
             }
 
@@ -288,6 +288,7 @@ namespace Epimon
             foundCharacterHealth -= attackMove.GetMoveDmg();
 
             Character foundCharacter = new Character(foundCharacterType, foundCharacterName, foundCharacterHealth, foundCharacterAttack, foundCharacterSpeed, foundCharacterId);
+            foundCharacter.Save();
 
             if (rdr != null)
             {

@@ -1,1 +1,15 @@
-
+<form action="/character-selected" method="post">
+<select id="character1-id" name="character1-id" type="text">
+    @foreach (var character in @Model)
+    {
+        <option value='@character.GetId()'>@character.GetName()</option>
+    }
+</select>
+<select id="character2-id" name="character2-id" type="text">
+    @foreach (var character in @Model)
+    {
+        <option value='@character.GetId()'>@character.GetName()</option>
+    }
+</select>
+<button type="submit">Add</button>
+</form>
