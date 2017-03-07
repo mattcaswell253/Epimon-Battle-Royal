@@ -15,10 +15,10 @@ namespace Epimon
 
             Get["/character-select"] = _ => {
 
-                // List<Character> allCharacters = Character.GetAll();
+                List<Character> allCharacters = Character.GetAll();
 
 
-                List<Character> allCharacters = Character.GetAllCharacters();
+
 
                 return View["character-select.cshtml", allCharacters];
             };
@@ -55,7 +55,7 @@ namespace Epimon
                 model.Add("character1Attacked", character1Attacked);
                 model.Add("character2Attacked", character2Attacked);
 
-                
+
 
                 return View["arena.cshtml", model];
             };
