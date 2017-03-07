@@ -7,14 +7,14 @@
         <form class="" action="/arena" method="post">
             @foreach(var character in Model)
             {
-                <div class="col-md-3">
+                <div class="row">
                 <img src="@character.GetImg()">
-                @character.GetName() - @character.GetType()
+                @character.GetName()
                 <input type="radio" name="player1" value="@character.GetId()">
                 <input type="radio" name="player2" value="@character.GetId()">
                 </div>
             }
-            <button type="submit" name="button">Fight!</button>
+            <button type="submit" class="btn">Fight!</button>
         </form>
     </div>
 
