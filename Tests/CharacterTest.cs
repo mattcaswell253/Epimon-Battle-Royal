@@ -62,9 +62,29 @@ namespace Epimon
             //Assert
             Assert.Equal(testList, result);
         }
+        [Fact]
+        public void Test_Attack_RemovesHealth()
+        {
+            //Arrange
+            Character testCharacter = new Character("Fish", "Gyrados", 20, 5, 5);
+            testCharacter.Save();
+
+            Move testMove = new Move("tackle" ,"normal", 10);
+            // testMove.Save();
+
+            //Act
+            Character characterResult = testCharacter.Attack(testMove);
+
+            int expectedResult = 10;
+            int result = characterResult.GetHealth();
+
+            //Assert
+            Assert.Equal(expectedResult, result);
+        }
         public void Dispose()
         {
             Character.DeleteAll();
+            Move.DeleteAll();
         }
     }
 }
