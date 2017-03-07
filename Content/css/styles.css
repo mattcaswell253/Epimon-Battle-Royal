@@ -15,9 +15,20 @@
    background-attachment: fixed;
    height: 100%;
    color: white;
-   background-repeat: no-repeat;;
+   background-repeat: no-repeat;
+
 }
 
 img {
     width: 50%;
+}
+
+#character-select {
+    font-family: 'Press Start 2P';
+    font-size: 5em;
+    color: black
+}
+
+.character-name {
+    font-family: 'Press Start 2P';
 }
