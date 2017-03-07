@@ -14,12 +14,7 @@ namespace Epimon
             };
 
             Get["/character-select"] = _ => {
-
-                List<Character> allCharacters = Character.GetAll();
-
-
-
-
+                List<Character> allCharacters = Character.GetAllCharacters();
                 return View["character-select.cshtml", allCharacters];
             };
             Post["/character-selected"] = _ => {

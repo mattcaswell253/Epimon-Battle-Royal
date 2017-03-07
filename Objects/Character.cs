@@ -303,7 +303,7 @@ namespace Epimon
             foundCharacterHealth -= attackMove.GetMoveDmg();
 
             Character foundCharacter = new Character(foundCharacterType, foundCharacterName, foundCharacterHealth, foundCharacterAttack, foundCharacterSpeed, foundCharacterImg, foundCharacterId);
-
+            foundCharacter.Save();
 
             if (rdr != null)
             {
