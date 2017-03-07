@@ -14,13 +14,13 @@ namespace Epimon
             };
 
             Get["/character-select"] = _ => {
-                List<Character> allCharacters = Character.GetAll();
+                List<Character> allCharacters = Character.GetAllCharacters();
                 return View["character-select.cshtml", allCharacters];
             };
 
             Get["/arena"] = _ => {
                 Dictionary<string, object> model = new Dictionary<string, object>();
-                List<Character> allCharacters = Character.GetAll();
+                List<Character> allCharacters = Character.GetAllCharacters();
                 List<Move> allMoves = Move.GetAllMoves();
                 model.Add("characters", allCharacters);
                 model.Add("moves", allMoves);

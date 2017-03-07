@@ -164,8 +164,9 @@ namespace Epimon
                 int characterHealth = rdr.GetInt32(3);
                 int characterAttack = rdr.GetInt32(4);
                 int characterSpeed = rdr.GetInt32(5);
+                string characterImg = rdr.GetString(6);
 
-                Character newCharacter = new Character(characterType, characterName, characterHealth, characterAttack, characterSpeed, characterId);
+                Character newCharacter = new Character(characterType, characterName, characterHealth, characterAttack, characterSpeed, characterImg, characterId);
                 newList.Add(newCharacter);
             }
             if(rdr != null)

@@ -2,9 +2,20 @@
     Layout="Shared/_Layout.cshtml";
 }
 
-@foreach(var character in Model)
-{
-    <div class="col-md-3">
-        @character.GetName() - @character.GetType()
+<body class="character-select">
+    <div class="row">
+        <form class="" action="/arena" method="post">
+            @foreach(var character in Model)
+            {
+                <div class="col-md-3">
+                <img src="@character.GetImg()">
+                @character.GetName() - @character.GetType()
+                <input type="radio" name="player1" value="@character.GetId()">
+                <input type="radio" name="player2" value="@character.GetId()">
+                </div>
+            }
+            <button type="submit" name="button">Fight!</button>
+        </form>
     </div>
-}
+
+</body>
