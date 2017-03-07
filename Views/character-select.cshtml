@@ -1,1 +1,10 @@
+@{
+    Layout="Shared/_Layout.cshtml";
+}
 
+@foreach(var character in Model)
+{
+    <div class="col-md-3">
+        @character.GetName() - @character.GetType()
+    </div>
+}
