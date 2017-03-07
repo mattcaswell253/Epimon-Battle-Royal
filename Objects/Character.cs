@@ -256,6 +256,50 @@ namespace Epimon
             }
             return moveList;
         }
+        public Character Attack(Move attackMove)
+        {
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("SELECT * FROM characters WHERE id = @CharacterId", conn);
+
+            SqlParameter characterIdParameter = new SqlParameter("@CharacterId", this.GetId());
+            cmd.Parameters.Add(characterIdParameter);
+
+            SqlDataReader rdr = cmd.ExecuteReader();
+
+            int foundCharacterId = 0;
+            string foundCharacterType = null;
+            string foundCharacterName = null;
+            int foundCharacterHealth = 0;
+            int foundCharacterAttack = 0;
+            int foundCharacterSpeed = 0;
+
+            while(rdr.Read())
+            {
+                foundCharacterId = rdr.GetInt32(0);
+                foundCharacterType = rdr.GetString(1);
+                foundCharacterName = rdr.GetString(2);
+                foundCharacterHealth = rdr.GetInt32(3);
+                foundCharacterAttack = rdr.GetInt32(4);
+                foundCharacterSpeed = rdr.GetInt32(5);
+            }
+
+            foundCharacterHealth -= attackMove.GetMoveDmg();
+
+            Character foundCharacter = new Character(foundCharacterType, foundCharacterName, foundCharacterHealth, foundCharacterAttack, foundCharacterSpeed, foundCharacterId);
+
+            if (rdr != null)
+            {
+                rdr.Close();
+            }
+            if (conn != null)
+            {
+                conn.Close();
+            }
+
+            return foundCharacter;
+        }
         public static void DeleteAll()
         {
             SqlConnection conn = DB.Connection();
