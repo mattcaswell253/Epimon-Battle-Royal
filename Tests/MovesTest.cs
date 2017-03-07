@@ -12,7 +12,6 @@ namespace Epimon
         public static Move generalMove2 = new Move("tackle" ,"normal", 10);
         public static Character firstCharacter = new Character("Fish", "Gyrados", 5, 5, 5);
 
-
         public MoveTest()
         {
             DBConfiguration.ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=epimon_test;Integrated Security=SSPI;";
@@ -65,7 +64,7 @@ namespace Epimon
         }
 
         [Fact]
-        public void Test_Find_FindsMoveInDatablase()
+        public void Test_Find_FindsMoveInDatabase()
         {
             //Arrange
             generalMove1.Save();
@@ -95,7 +94,8 @@ namespace Epimon
         public void Dispose()
         {
             Move.DeleteAll();
-            // Character.DeleteAll();
+            Character.DeleteAll();
+
         }
     }
 }
