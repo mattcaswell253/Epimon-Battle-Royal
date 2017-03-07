@@ -15,7 +15,6 @@ namespace Epimon
         private int _speed;
         private string _img;
 
-
         public Character(string Type, string Name, int Health, int Attack, int Speed, string img, int Id = 0)
         {
             _id = Id;
@@ -303,9 +302,23 @@ namespace Epimon
             foundCharacterHealth -= attackMove.GetMoveDmg();
 
             Character foundCharacter = new Character(foundCharacterType, foundCharacterName, foundCharacterHealth, foundCharacterAttack, foundCharacterSpeed, foundCharacterImg, foundCharacterId);
-            foundCharacter.Save();
 
+            SqlCommand cmd2 = new SqlCommand("UPDATE characters SET health = @CharacterHealth OUTPUT INSERTED.health WHERE id = @CharacterID;", conn);
+
+            SqlParameter healthParameter = new SqlParameter("@CharacterHealth", foundCharacterHealth);
+            cmd2.Parameters.Add(healthParameter);
+
+            SqlDataReader rdr2 = cmd2.ExecuteReader();
+
+            while(rdr2.Read())
+            {
+                this._id = rdr2.GetInt32(0);
+            }
             if (rdr != null)
+            {
+                rdr.Close();
+            }
+            if (rdr2 != null)
             {
                 rdr.Close();
             }
@@ -316,6 +329,49 @@ namespace Epimon
 
             return foundCharacter;
         }
+
+   //      public void Update(string newHealth)
+   // {
+   //     SqlConnection conn = DB.Connection();
+   //     conn.Open();
+   //
+   //     SqlCommand cmd = new SqlCommand("UPDATE characters SET name = @NewHealth OUTPUT INSERTED.name WHERE id = @CharacterId;", conn);
+   //
+   //     SqlParameter newHealthParameter = new SqlParameter("NewHealth", newHealth);
+   //     cmd.Parameters.Add(newHealthParameter);
+   //
+   //     SqlParameter venueIdParameter = new SqlParameter("@CharacterId", this.GetId());
+   //     cmd.Parameters.Add(venueIdParameter);
+   //
+   //
+   //     SqlDataReader rdr = cmd.ExecuteReader();
+   //
+   //     while(rdr.Read())
+   //     {
+   //         this._health = rdr.GetInt32(0);
+   //     }
+   //
+   //     if (rdr != null)
+   //     {
+   //         rdr.Close();
+   //     }
+   //     if (conn != null)
+   //     {
+   //         conn.Close();
+   //     }
+   // }
+   public static void DeleteAll()
+   {
+       SqlConnection conn = DB.Connection();
+       conn.Open();
+       SqlCommand cmd = new SqlCommand("DELETE FROM venues;", conn);
+       cmd.ExecuteNonQuery();
+       conn.Close();
+   }
+
+
+
+
         public static void DeleteAll()
         {
             SqlConnection conn = DB.Connection();
