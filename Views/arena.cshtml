@@ -18,10 +18,11 @@
     </select>
     <button type="submit">Attack!</button>
 </form>
-
-@if (Model["character1Attacked"].GetHealth() != 0)
+@Model["p1health"]
+@Model["p2health"]
+@* @if (Model["character1Attacked"].GetHealth() != 0)
 {
 @Model["character1Attacked"].GetHealth();
 @Model["character2Attacked"].GetHealth();
 
-}
+} *@
