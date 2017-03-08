@@ -1,4 +1,4 @@
-
+@* 
 <form action="/character-selected" method="post">
 <select id="character1-id" name="character1-id" type="text">
     @foreach (var character in @Model)
@@ -13,10 +13,11 @@
     }
 </select>
 <button type="submit">Add</button>
-</form>
+</form> *@
 
 
-    <!-- Layout="Shared/_Layout.cshtml";
+{
+    Layout="Shared/_Layout.cshtml";
 }
 
 <body class="character-select">
@@ -37,4 +38,4 @@
             <button type="submit" class="btn">Fight!</button>
         </form>
     </div>
-</body>  -->
+</body>
