@@ -14,7 +14,7 @@
         @Model["character1"].GetName()
         @if (Model["p1health"] > 0)
         {
-          <span>Health:@Model["p1health"]</span>
+          <span>Health: @Model["p1health"]</span>
         }
         else
         {
@@ -38,7 +38,7 @@
           <input id='character1-id' name='character1-id' type='hidden' value='@Model["character1"].GetId()'>
           <input id='character2-id' name='character2-id' type='hidden' value='@Model["character2"].GetId()'>
           <select id="character2Attack" name="character2Attack" type="text">
-
+            <option selected="selected">Select Attack</option>
             @foreach(var move2 in @Model["character2"].GetMoves())
             {
               <option value='@move2.GetMoveId()'>@move2.GetMoveName()</option>

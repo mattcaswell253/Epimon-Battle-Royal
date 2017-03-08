@@ -53,6 +53,7 @@ background-color: black;
 
 .arena {
   background-image: url("/content/img/arena.jpg");
+  font-family: 'Press Start 2P';
   background-size: cover;
   background-attachment: fixed;
   background-repeat: no-repeat;
