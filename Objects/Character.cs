@@ -15,6 +15,9 @@ namespace Epimon
         private int _speed;
         private string _img;
 
+        private int _player1Health;
+        private int _player2Health;
+
 
         public Character(string Type, string Name, int Health, int Attack, int Speed, string img, int Id = 0)
         {

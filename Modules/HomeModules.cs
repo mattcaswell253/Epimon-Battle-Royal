@@ -14,22 +14,18 @@ namespace Epimon
             };
 
             Get["/character-select"] = _ => {
-
-                List<Character> allCharacters = Character.GetAll();
-
-
-
-
+                List<Character> allCharacters = Character.GetAllCharacters();
                 return View["character-select.cshtml", allCharacters];
             };
+
             Post["/character-selected"] = _ => {
                 Dictionary<string, object> model = new Dictionary<string, object>{};
-                Character character1 = Character.Find(Request.Form["character1-id"]);
-                Character character2 = Character.Find(Request.Form["character2-id"]);
+                Character character1 = Character.Find(Request.Form["player1"]);
+                Character character2 = Character.Find(Request.Form["player2"]);
                 List<Move> character1Moves = character1.GetMoves();
                 List<Move> character2Moves = character2.GetMoves();
-                Character character1Attacked = Character.Find(Request.Form["character1-id"]);
-                Character character2Attacked = Character.Find(Request.Form["character2-id"]);
+                Character character1Attacked = Character.Find(Request.Form["player1"]);
+                Character character2Attacked = Character.Find(Request.Form["player2"]);
                 model.Add("character1", character1);
                 model.Add("character2", character2);
                 model.Add("character1Moves", character1Moves);
@@ -39,11 +35,11 @@ namespace Epimon
                 Console.WriteLine(model["character1Moves"]);
                 return View["arena.cshtml", model];
             };
+
             Post["/attack"] = _ => {
                 Dictionary<string, object> model = new Dictionary<string, object>();
-
-                Character character1 = Character.Find(Request.Form["character1-id"]);
-                Character character2 = Character.Find(Request.Form["character2-id"]);
+                Character character1 = Character.Find(Request.Form["player1"]);
+                Character character2 = Character.Find(Request.Form["player2"]);
                 List<Move> character1Moves = character1.GetMoves();
                 List<Move> character2Moves = character2.GetMoves();
                 Character character1Attacked = character1.Attack(Move.Find(Request.Form["character2Attack"]));
@@ -54,15 +50,12 @@ namespace Epimon
                 model.Add("character2Moves", character2Moves);
                 model.Add("character1Attacked", character1Attacked);
                 model.Add("character2Attacked", character2Attacked);
-
-
-
                 return View["arena.cshtml", model];
             };
 
-
-
-
+            Get["/game-over"] = _ => {
+                return View["game_over.cshtml"];
+            };
         }
     }
 }

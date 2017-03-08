@@ -1,35 +1,27 @@
 .start-menu {
-
    background-image: url("/content/img/background2.png");
    background-size: cover;
    background-attachment: fixed;
-   /*height: 100%;
-   color: white;*/
    background-repeat: no-repeat;
 }
 
 .character-select {
-
    background-image: url("/content/img/character-select1.jpg");
+   font-family: 'Press Start 2P';
    background-size: cover;
    background-attachment: fixed;
    height: 100%;
    color: white;
    background-repeat: no-repeat;
-
 }
 
 img {
     width: 40%;
 }
 
-.character-select{
-    font-family: 'Press Start 2P';
-}
-
 #character-select {
     font-size: 5em;
-    color: black
+    color: black;
 }
 
 .player-select {
@@ -39,4 +31,22 @@ img {
 
 #character-name {
     font-size: 3em;
+}
+
+.game-over {
+background-color: black;
+}
+
+.continue img {
+    width: 60%;
+}
+
+.continue {
+    text-align: center;
+    margin-top: 15%;
+}
+
+.buttons {
+    margin-top: 60%;
+    margin-left: 55%;
 }

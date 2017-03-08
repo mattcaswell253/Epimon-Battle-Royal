@@ -1,27 +1,44 @@
 @{
     Layout="Shared/_Layout.cshtml";
 }
-<form action="/attack" method="post">
-    <input id='character1-id' name='character1-id' type='hidden' value='@Model["character1"].GetId()'>
-    <input id='character2-id' name='character2-id' type='hidden' value='@Model["character2"].GetId()'>
-    <select id="character1Attack" name="character1Attack" type="text">
-        @foreach(var move in @Model["character1Moves"])
-        {
-            <option value='@move.GetMoveId()'>@move.GetMoveName()</option>
-        }
-    </select>
-    <select id="character2Attack" name="character2Attack" type="text">
-        @foreach(var move2 in @Model["character2Moves"])
-        {
-            <option value='@move2.GetMoveId()'>@move2.GetMoveName()</option>
-        }
-    </select>
-    <button type="submit">Attack!</button>
-</form>
+<body>
+    <div class="container">
+        <form action="/attack" method="post">
+            <div class="row">
+                <label for="character1-id">Player 1</label>
+                @Model["character1"].GetName()
+                <img src="@Model["character1"].GetImg()">
+                <input id='player1' name='player1' type='hidden' value='@Model["character1"].GetId()'>
+                <select id="character1Attack" name="character1Attack" type="text">
+                    @foreach(var move in @Model["character1Moves"])
+                    {
+                        <option value='@move.GetMoveId()'>@move.GetMoveName()</option>
+                    }
+                </select>
+                @if (Model["character1Attacked"].GetHealth() > 0)
+                {
+                    <span>Health: @Model["character1Attacked"].GetHealth()</span>;
+                }
+            </div>
+            <div class="row">
+                <label for="character2-id">Player 2</label>
+                @Model["character2"].GetName()
+                <img src="@Model["character2"].GetImg()">
+                <input id='player2' name='player2' type='hidden' value='@Model["character2"].GetId()'>
+                <select id="character2Attack" name="character2Attack" type="text">
+                    @foreach(var move2 in @Model["character2Moves"])
+                    {
+                        <option value='@move2.GetMoveId()'>@move2.GetMoveName()</option>
+                    }
+                </select>
 
-@if (Model["character1Attacked"].GetHealth() != 0)
-{
-@Model["character1Attacked"].GetHealth();
-@Model["character2Attacked"].GetHealth();
+                @if (Model["character2Attacked"].GetHealth() > 0)
+                {
 
-}
+                    <span>Health: @Model["character2Attacked"].GetHealth()</span>;
+                }
+            </div>
+            <button type="submit" class="btn">Attack!</button>
+        </form>
+    </div>
+</body>
