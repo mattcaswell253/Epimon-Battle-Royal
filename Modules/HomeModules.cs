@@ -33,7 +33,14 @@ namespace Epimon
                 model.Add("character1", character1);
                 model.Add("character2", character2);
                 model.Add("character1Moves", character1Moves);
-                return View["arena1.cshtml", model];
+                if (character1.GetSpeed() > character2.GetSpeed())
+                {
+                  return View["arena1.cshtml", model];
+                }
+                else
+                {
+                  return View["arena2.cshtml", model];
+                }
             };
             // after player 1 attacks, takes you to arena2 for player 2's attack
             Post["/attack1"] = _ => {
@@ -41,9 +48,9 @@ namespace Epimon
                 Character character1 = Character.Find(Request.Form["character1-id"]);
                 Character character2 = Character.Find(Request.Form["character2-id"]);
                 List<Move> character1Moves = character1.GetMoves();
+                Character.player2.Attack2(Move.Find(Request.Form["character1Attack"]));
                 int health1 = Character.player1.GetHealth();
                 int health2 = Character.player2.GetHealth();
-                Character.player2.Attack2(Move.Find(Request.Form["character1Attack"]));
                 model.Add("p1health", health1);
                 model.Add("p2health", health2);
                 model.Add("character1", character1);
@@ -64,9 +71,9 @@ namespace Epimon
                 Character character1 = Character.Find(Request.Form["character1-id"]);
                 Character character2 = Character.Find(Request.Form["character2-id"]);
                 List<Move> character2Moves = character2.GetMoves();
+                Character.player1.Attack1(Move.Find(Request.Form["character2Attack"]));
                 int health1 = Character.player1.GetHealth();
                 int health2 = Character.player2.GetHealth();
-                Character.player1.Attack1(Move.Find(Request.Form["character2Attack"]));
                 model.Add("p1health", health1);
                 model.Add("p2health", health2);
                 model.Add("character1", character1);
@@ -78,7 +85,7 @@ namespace Epimon
                 }
                 else
                 {
-                  return View["game_over.cshtml"];
+                  return View["game_over2.cshtml", model];
                 }
             };
         }

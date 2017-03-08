@@ -1,5 +1,5 @@
 @{
-    Layout="Shared/_Layout.cshtml";
+  Layout="Shared/_Layout.cshtml";
 }
 
 <body class="arena">
@@ -19,12 +19,13 @@
           <input id='character1-id' name='character1-id' type='hidden' value='@Model["character1"].GetId()'>
           <input id='character2-id' name='character2-id' type='hidden' value='@Model["character2"].GetId()'>
           <select id="character1Attack" name="character1Attack" type="text">
+            <option selected="selected">Select Attack</option>
             @foreach(var move in @Model["character1"].GetMoves())
             {
               <option value='@move.GetMoveId()'>@move.GetMoveName()</option>
             }
           </select>
-
+          
           <button type="submit" class="btn">Attack!</button>
         </form>
       </div>
