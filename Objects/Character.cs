@@ -15,8 +15,9 @@ namespace Epimon
         private int _speed;
         private string _img;
 
-        private int _player1Health;
-        private int _player2Health;
+
+        public static Character player1;
+        public static Character player2;
 
 
         public Character(string Type, string Name, int Health, int Attack, int Speed, string img, int Id = 0)
@@ -273,52 +274,57 @@ namespace Epimon
             }
             return moveList;
         }
-        public Character Attack(Move attackMove)
+        public void Attack1(Move attackMove)
         {
-            SqlConnection conn = DB.Connection();
-            conn.Open();
-
-            SqlCommand cmd = new SqlCommand("SELECT * FROM characters WHERE id = @CharacterId", conn);
-
-            SqlParameter characterIdParameter = new SqlParameter("@CharacterId", this.GetId());
-            cmd.Parameters.Add(characterIdParameter);
-
-            SqlDataReader rdr = cmd.ExecuteReader();
-
-            int foundCharacterId = 0;
-            string foundCharacterType = null;
-            string foundCharacterName = null;
-            int foundCharacterHealth = 0;
-            int foundCharacterAttack = 0;
-            int foundCharacterSpeed = 0;
-            string foundCharacterImg = null;
-            while(rdr.Read())
-            {
-                foundCharacterId = rdr.GetInt32(0);
-                foundCharacterType = rdr.GetString(1);
-                foundCharacterName = rdr.GetString(2);
-                foundCharacterHealth = rdr.GetInt32(3);
-                foundCharacterAttack = rdr.GetInt32(4);
-                foundCharacterSpeed = rdr.GetInt32(5);
-                foundCharacterImg = rdr.GetString(6);
-            }
-
-            foundCharacterHealth -= attackMove.GetMoveDmg();
-
-            Character foundCharacter = new Character(foundCharacterType, foundCharacterName, foundCharacterHealth, foundCharacterAttack, foundCharacterSpeed, foundCharacterImg, foundCharacterId);
-
-
-            if (rdr != null)
-            {
-                rdr.Close();
-            }
-            if (conn != null)
-            {
-                conn.Close();
-            }
-
-            return foundCharacter;
+            player1._health -= attackMove.GetMoveDmg();
         }
+        public void Attack2(Move attackMove)
+        {
+            player2._health -= attackMove.GetMoveDmg();
+        }
+
+   //      public void Update(string newHealth)
+   // {
+   //     SqlConnection conn = DB.Connection();
+   //     conn.Open();
+   //
+   //     SqlCommand cmd = new SqlCommand("UPDATE characters SET name = @NewHealth OUTPUT INSERTED.name WHERE id = @CharacterId;", conn);
+   //
+   //     SqlParameter newHealthParameter = new SqlParameter("NewHealth", newHealth);
+   //     cmd.Parameters.Add(newHealthParameter);
+   //
+   //     SqlParameter venueIdParameter = new SqlParameter("@CharacterId", this.GetId());
+   //     cmd.Parameters.Add(venueIdParameter);
+   //
+   //
+   //     SqlDataReader rdr = cmd.ExecuteReader();
+   //
+   //     while(rdr.Read())
+   //     {
+   //         this._health = rdr.GetInt32(0);
+   //     }
+   //
+   //     if (rdr != null)
+   //     {
+   //         rdr.Close();
+   //     }
+   //     if (conn != null)
+   //     {
+   //         conn.Close();
+   //     }
+   // }
+   // public static void DeleteAll()
+   // {
+   //     SqlConnection conn = DB.Connection();
+   //     conn.Open();
+   //     SqlCommand cmd = new SqlCommand("DELETE FROM venues;", conn);
+   //     cmd.ExecuteNonQuery();
+   //     conn.Close();
+   // }
+
+
+
+
         public static void DeleteAll()
         {
             SqlConnection conn = DB.Connection();

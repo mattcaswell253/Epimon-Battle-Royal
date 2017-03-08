@@ -1,6 +1,7 @@
 @{
     Layout="Shared/_Layout.cshtml";
 }
+
 <body>
     <div class="container">
         <form action="/attack" method="post">
@@ -17,7 +18,7 @@
                 </select>
                 @if (Model["character1Attacked"].GetHealth() > 0)
                 {
-                    <span>Health: @Model["character1Attacked"].GetHealth()</span>;
+                    <span>Health:@Model["p1health"]</span>;
                 }
             </div>
             <div class="row">
@@ -35,10 +36,36 @@
                 @if (Model["character2Attacked"].GetHealth() > 0)
                 {
 
-                    <span>Health: @Model["character2Attacked"].GetHealth()</span>;
+                    <span>Health: @Model["p2health"]</span>;
                 }
             </div>
             <button type="submit" class="btn">Attack!</button>
         </form>
     </div>
 </body>
+
+@* <form action="/attack" method="post">
+    <input id='character1-id' name='character1-id' type='hidden' value='@Model["character1"].GetId()'>
+    <input id='character2-id' name='character2-id' type='hidden' value='@Model["character2"].GetId()'>
+    <select id="character1Attack" name="character1Attack" type="text">
+        @foreach(var move in @Model["character1Moves"])
+        {
+            <option value='@move.GetMoveId()'>@move.GetMoveName()</option>
+        }
+    </select>
+    <select id="character2Attack" name="character2Attack" type="text">
+        @foreach(var move2 in @Model["character2Moves"])
+        {
+            <option value='@move2.GetMoveId()'>@move2.GetMoveName()</option>
+        }
+    </select>
+    <button type="submit">Attack!</button>
+</form>
+@Model["p1health"]
+@Model["p2health"]
+@* @if (Model["character1Attacked"].GetHealth() != 0)
+{
+@Model["character1Attacked"].GetHealth();
+@Model["character2Attacked"].GetHealth();
+
+} *@ *@

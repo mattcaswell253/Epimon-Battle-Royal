@@ -17,45 +17,54 @@ namespace Epimon
                 List<Character> allCharacters = Character.GetAllCharacters();
                 return View["character-select.cshtml", allCharacters];
             };
-
             Post["/character-selected"] = _ => {
                 Dictionary<string, object> model = new Dictionary<string, object>{};
-                Character character1 = Character.Find(Request.Form["player1"]);
-                Character character2 = Character.Find(Request.Form["player2"]);
+                Character character1 = Character.Find(Request.Form["character1-id"]);
+                Character character2 = Character.Find(Request.Form["character2-id"]);
                 List<Move> character1Moves = character1.GetMoves();
                 List<Move> character2Moves = character2.GetMoves();
-                Character character1Attacked = Character.Find(Request.Form["player1"]);
-                Character character2Attacked = Character.Find(Request.Form["player2"]);
+                Character.player1 = Character.Find(Request.Form["character1-id"]);
+                Character.player2 = Character.Find(Request.Form["character2-id"]);
+                int health1 = Character.player1.GetHealth();
+                int health2 = Character.player2.GetHealth();
+                // Character character1Attacked = Character.Find(Request.Form["character1-id"]);
+                // Character character2Attacked = Character.Find(Request.Form["character2-id"]);
+                model.Add("p1health", health1);
+                model.Add("p2health", health2);
                 model.Add("character1", character1);
                 model.Add("character2", character2);
                 model.Add("character1Moves", character1Moves);
                 model.Add("character2Moves", character2Moves);
-                model.Add("character1Attacked", character1Attacked);
-                model.Add("character2Attacked", character2Attacked);
-                Console.WriteLine(model["character1Moves"]);
+                // model.Add("character1Attacked", character1Attacked);
+                // model.Add("character2Attacked", character2Attacked);
                 return View["arena.cshtml", model];
             };
-
             Post["/attack"] = _ => {
                 Dictionary<string, object> model = new Dictionary<string, object>();
-                Character character1 = Character.Find(Request.Form["player1"]);
-                Character character2 = Character.Find(Request.Form["player2"]);
+                Character character1 = Character.Find(Request.Form["character1-id"]);
+                Character character2 = Character.Find(Request.Form["character2-id"]);
                 List<Move> character1Moves = character1.GetMoves();
                 List<Move> character2Moves = character2.GetMoves();
-                Character character1Attacked = character1.Attack(Move.Find(Request.Form["character2Attack"]));
-                Character character2Attacked = character2.Attack(Move.Find(Request.Form["character1Attack"]));
+                // Character.player1 = Character.Find(Request.Form["character1-id"]);
+                // Character.player2 = Character.Find(Request.Form["character2-id"]);
+                int health1 = Character.player1.GetHealth();
+                int health2 = Character.player2.GetHealth();
+                Character.player1.Attack1(Move.Find(Request.Form["character2Attack"]));
+                Character.player2.Attack2(Move.Find(Request.Form["character1Attack"]));
+                model.Add("p1health", health1);
+                model.Add("p2health", health2);
                 model.Add("character1", character1);
                 model.Add("character2", character2);
                 model.Add("character1Moves", character1Moves);
                 model.Add("character2Moves", character2Moves);
-                model.Add("character1Attacked", character1Attacked);
-                model.Add("character2Attacked", character2Attacked);
+                // model.Add("character1Attacked", character1Attacked);
+                // model.Add("character2Attacked", character2Attacked);
                 return View["arena.cshtml", model];
             };
 
-            Get["/game-over"] = _ => {
-                return View["game_over.cshtml"];
-            };
+
+
+
         }
     }
 }
