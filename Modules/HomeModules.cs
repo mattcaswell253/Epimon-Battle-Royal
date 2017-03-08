@@ -41,9 +41,10 @@ namespace Epimon
                 Character character2 = Character.Find(Request.Form["character2-id"]);
                 List<Move> character1Moves = character1.GetMoves();
                 // List<Move> character2Moves = character2.GetMoves();
+
+                Character.Attack2(Move.Find(Request.Form["character1Attack"]));
                 int health1 = Character.player1.GetHealth();
                 int health2 = Character.player2.GetHealth();
-                Character.player2.Attack1(Move.Find(Request.Form["character1Attack"]));
                 model.Add("p1health", health1);
                 model.Add("p2health", health2);
                 model.Add("character1", character1);
@@ -58,9 +59,9 @@ namespace Epimon
                 Character character2 = Character.Find(Request.Form["character2-id"]);
                 // List<Move> character1Moves = character1.GetMoves();
                 List<Move> character2Moves = character2.GetMoves();
+                Character.Attack1(Move.Find(Request.Form["character2Attack"]));
                 int health1 = Character.player1.GetHealth();
                 int health2 = Character.player2.GetHealth();
-                Character.player1.Attack2(Move.Find(Request.Form["character2Attack"]));
                 model.Add("p1health", health1);
                 model.Add("p2health", health2);
                 model.Add("character1", character1);

@@ -274,11 +274,11 @@ namespace Epimon
             }
             return moveList;
         }
-        public void Attack1(Move attackMove)
+        public static void Attack1(Move attackMove)
         {
             player1._health -= attackMove.GetMoveDmg();
         }
-        public void Attack2(Move attackMove)
+        public static void Attack2(Move attackMove)
         {
             player2._health -= attackMove.GetMoveDmg();
         }
