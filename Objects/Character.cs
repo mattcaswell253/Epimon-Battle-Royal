@@ -283,45 +283,6 @@ namespace Epimon
             player2._health -= attackMove.GetMoveDmg();
         }
 
-   //      public void Update(string newHealth)
-   // {
-   //     SqlConnection conn = DB.Connection();
-   //     conn.Open();
-   //
-   //     SqlCommand cmd = new SqlCommand("UPDATE characters SET name = @NewHealth OUTPUT INSERTED.name WHERE id = @CharacterId;", conn);
-   //
-   //     SqlParameter newHealthParameter = new SqlParameter("NewHealth", newHealth);
-   //     cmd.Parameters.Add(newHealthParameter);
-   //
-   //     SqlParameter venueIdParameter = new SqlParameter("@CharacterId", this.GetId());
-   //     cmd.Parameters.Add(venueIdParameter);
-   //
-   //
-   //     SqlDataReader rdr = cmd.ExecuteReader();
-   //
-   //     while(rdr.Read())
-   //     {
-   //         this._health = rdr.GetInt32(0);
-   //     }
-   //
-   //     if (rdr != null)
-   //     {
-   //         rdr.Close();
-   //     }
-   //     if (conn != null)
-   //     {
-   //         conn.Close();
-   //     }
-   // }
-   // public static void DeleteAll()
-   // {
-   //     SqlConnection conn = DB.Connection();
-   //     conn.Open();
-   //     SqlCommand cmd = new SqlCommand("DELETE FROM venues;", conn);
-   //     cmd.ExecuteNonQuery();
-   //     conn.Close();
-   // }
-
 
 
 
