@@ -17,12 +17,12 @@ namespace Epimon
                 List<Character> allCharacters = Character.GetAllCharacters();
                 return View["character-select.cshtml", allCharacters];
             };
-            Post["/character-selected"] = _ => {
+            Post["/arena"] = _ => {
                 Dictionary<string, object> model = new Dictionary<string, object>{};
                 Character character1 = Character.Find(Request.Form["character1-id"]);
                 Character character2 = Character.Find(Request.Form["character2-id"]);
                 List<Move> character1Moves = character1.GetMoves();
-                List<Move> character2Moves = character2.GetMoves();
+                // List<Move> character2Moves = character2.GetMoves();
                 Character.player1 = Character.Find(Request.Form["character1-id"]);
                 Character.player2 = Character.Find(Request.Form["character2-id"]);
                 int health1 = Character.player1.GetHealth();
@@ -32,8 +32,8 @@ namespace Epimon
                 model.Add("character1", character1);
                 model.Add("character2", character2);
                 model.Add("character1Moves", character1Moves);
-                model.Add("character2Moves", character2Moves);
-                return View["arena.cshtml", model];
+                // model.Add("character2Moves", character2Moves);
+                return View["arena1.cshtml", model];
             };
             Post["/attack1"] = _ => {
                 Dictionary<string, object> model = new Dictionary<string, object>();
@@ -43,14 +43,14 @@ namespace Epimon
                 // List<Move> character2Moves = character2.GetMoves();
                 int health1 = Character.player1.GetHealth();
                 int health2 = Character.player2.GetHealth();
-                Character.player2.Attack2(Move.Find(Request.Form["character1Attack"]));
+                Character.player2.Attack1(Move.Find(Request.Form["character1Attack"]));
                 model.Add("p1health", health1);
                 model.Add("p2health", health2);
                 model.Add("character1", character1);
                 model.Add("character2", character2);
                 model.Add("character1Moves", character1Moves);
                 // model.Add("character2Moves", character2Moves);
-                return View["arena.cshtml", model];
+                return View["arena2.cshtml", model];
             };
             Post["/attack2"] = _ => {
                 Dictionary<string, object> model = new Dictionary<string, object>();
@@ -60,14 +60,14 @@ namespace Epimon
                 List<Move> character2Moves = character2.GetMoves();
                 int health1 = Character.player1.GetHealth();
                 int health2 = Character.player2.GetHealth();
-                Character.player1.Attack1(Move.Find(Request.Form["character2Attack"]));
+                Character.player1.Attack2(Move.Find(Request.Form["character2Attack"]));
                 model.Add("p1health", health1);
                 model.Add("p2health", health2);
                 model.Add("character1", character1);
                 model.Add("character2", character2);
                 // model.Add("character1Moves", character1Moves);
                 model.Add("character2Moves", character2Moves);
-                return View["arena.cshtml", model];
+                return View["arena1.cshtml", model];
             };
 
 

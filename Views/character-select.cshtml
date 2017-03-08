@@ -23,7 +23,7 @@
 <body class="character-select">
     <div class="container">
         <span id="character-select">Select Character</span>
-        <form class="characters" action="/character-selected" method="post">
+        <form class="characters" action="/arena" method="post">
             @foreach(var character in Model)
             {
                 <img src="@character.GetImg()">

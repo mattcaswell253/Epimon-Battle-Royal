@@ -50,3 +50,10 @@ background-color: black;
     margin-top: 60%;
     margin-left: 55%;
 }
+
+.arena {
+  background-image: url("/content/img/arena.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}

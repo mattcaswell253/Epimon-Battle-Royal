@@ -1,0 +1,51 @@
+@{
+    Layout="Shared/_Layout.cshtml";
+}
+
+<body class="arena">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+      </div>
+      <div class="col-md-6">
+        <img src="@Model["character1"].GetImg()">
+        <form class="" action="/attack1" method="post">
+          <label for="character1-id">Player 1</label>
+          @Model["character1"].GetName()
+          @if (Model["p1health"] > 0)
+          {
+            <span>Health: @Model["p1health"]</span>
+          }
+          <input id='character1-id' name='character1-id' type='hidden' value='@Model["character1"].GetId()'>
+          <input id='character2-id' name='character2-id' type='hidden' value='@Model["character2"].GetId()'>
+          <select id="character1Attack" name="character1Attack" type="text">
+            @foreach(var move in @Model["character1"].GetMoves())
+            {
+              <option value='@move.GetMoveId()'>@move.GetMoveName()</option>
+            }
+          </select>
+
+          <button type="submit" class="btn">Attack!</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-md-6">
+        <img src="@Model["character2"].GetImg()">
+        <label for="character2-id">Player 2</label>
+        @Model["character2"].GetName()
+        @if (Model["p2health"] > 0)
+        {
+          <span>Health: @Model["p2health"]</span>
+        }
+      </div>
+
+      <div class="col-md-6">
+      </div>
+
+    </div>
+
+  </div>
+</body>
