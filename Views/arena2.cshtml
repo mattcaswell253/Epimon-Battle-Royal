@@ -3,11 +3,8 @@
 }
 
 <body class="arena">
-  <div class="container">
+  <div class="container arena-character">
     <div class="row">
-      <div class="col-md-6">
-      </div>
-
       <div class="col-md-6">
         <div class="playerImg2">
           <img src="@Model["character1"].GetImg()">
@@ -19,11 +16,6 @@
           <span>Health: @Model["p1health"]</span>
         }
       </div>
-
-    </div>
-
-    <div class="row">
-
       <div class="col-md-6">
         <div class="playerImg2">
           <img src="@Model["character2"].GetImg()">
@@ -47,11 +39,6 @@
           <button type="submit" id="move2" class="btn">Attack!</button>
         </form>
       </div>
-
-
-      <div class="col-md-6">
-      </div>
     </div>
-
   </div>
 </body>
