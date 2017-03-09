@@ -8,7 +8,7 @@
   <div class="container arena-character">
     <div class="row">
       <div class="col-md-6">
-        <div class="stats">
+        <div class="stats1">
           <label for="character1-id">Player 1</label>
           <span class="character-name">@Model["character1"].GetName()</span><br>
           @if (Model["p1health"] > 0)
@@ -20,12 +20,12 @@
             <p>Game over!</p>
           }
         </div>
-        <div class="playerImg2">
+        <div class="playerImg1">
           <img src="@Model["character1"].GetImg()">
         </div>
       </div>
       <div class="col-md-6">
-        <div class="stats">
+        <div class="stats2">
           <label for="character2-id">Player 2</label>
           <span class="character-name">@Model["character2"].GetName()</span><br>
           @if (Model["p2health"] > 0)
@@ -36,7 +36,7 @@
         <div class="playerImg2">
           <img src="@Model["character2"].GetImg2()">
         </div>
-        <form class="stats" action="/attack2" method="post">
+        <form class="stats2" action="/attack2" method="post">
           <input id='character1-id' name='character1-id' type='hidden' value='@Model["character1"].GetId()'>
           <input id='character2-id' name='character2-id' type='hidden' value='@Model["character2"].GetId()'>
           <select id="character2Attack" name="character2Attack" type="text">
