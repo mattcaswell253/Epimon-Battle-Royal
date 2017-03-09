@@ -24,23 +24,14 @@
             {
               <option value='@move.GetMoveId()'>@move.GetMoveName()</option>
             }
-          </select>
-<<<<<<< HEAD
-
-          <button type="submit" class="btn">Attack!</button>
-=======
+          </select>  
           <button type="submit" id="move2" class="btn">Attack!</button>
->>>>>>> 5a157a5f19208f44ed2918cc4ae4ed7073ff22b9
         </form>
       </div>
       <div class="col-md-6">
-<<<<<<< HEAD
-        <img src="@Model["character2"].GetImg2()">
-=======
         <div class="playerImg2">
           <img src="@Model["character2"].GetImg()">
         </div>
->>>>>>> 5a157a5f19208f44ed2918cc4ae4ed7073ff22b9
         <label for="character2-id">Player 2</label>
         @Model["character2"].GetName()
         @if (Model["p2health"] > 0)
