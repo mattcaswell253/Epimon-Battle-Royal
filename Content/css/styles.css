@@ -18,6 +18,12 @@
   perspective: 1000px;
 }
 
+.rocket img, .dbz img, .mortal img, .shanghai img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 @keyframes shake {
   10%, 90% {
     transform: translate3d(-3px, 0, 0);
@@ -67,13 +73,11 @@ margin-top: 10%;
 
 .playerImg1 img {
     width: 100%;
-    margin-right: 10%;
 }
 
 
 .playerImg2 img {
     width: 100%;
-    margin-left: 10%;
 }
 
 .continue {
@@ -84,6 +88,38 @@ margin-top: 10%;
 .buttons {
     /*margin-top: 60%;*/
     font-family: 'Press Start 2P';
+}
+
+.rocketArena {
+  background-image: url("/content/img/rocket.jpg");
+  font-family: 'Press Start 2P';
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+.mortalArena {
+  background-image: url("/content/img/mortal.jpg");
+  font-family: 'Press Start 2P';
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+.shanghaiArena {
+  background-image: url("/content/img/shanghai.jpg");
+  font-family: 'Press Start 2P';
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+.dbzArena {
+  background-image: url("/content/img/dbz.jpg");
+  font-family: 'Press Start 2P';
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 }
 
 .title {
@@ -109,12 +145,18 @@ margin-top: 10%;
   background-color: red;
 }
 
+.dojo-select {
+  font-size: 3em;
+  color: black;
+  background-color: red;
+}
+
 .arena-character {
   margin-top: 23%;
 
 }
 
-.stats1, .stats2 {
+.stats {
   background-color: rgba(220, 220, 220, .8);
   border: solid black 1px;
   border-radius: 5px;
@@ -123,20 +165,18 @@ margin-top: 10%;
   text-align: center;
 }
 
-
-.stats2 {
-  margin-left: 10%;
-}
-.stats {
-  margin-right: 10%;
-}
-
 .attack {
   background-color: red;
 }
 
 select {
   padding: 4px;
+}
+
+input[type="radio"] {
+  margin-top: 30px;
+  margin-bottom: 60px;
+  transform: scale(3);
 }
 
 body {
@@ -149,4 +189,15 @@ body {
 
 .home-style img {
   width: 50%;
+}
+
+.arena-select {
+  text-align: center;
+  color: white;
+  font-family: 'Press Start 2P';
+}
+
+.arena-select img {
+  width: 90%;
+  border-radius: 5px;
 }
