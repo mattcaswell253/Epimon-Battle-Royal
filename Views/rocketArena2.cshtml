@@ -1,0 +1,191 @@
+@{
+  Layout="Shared/_Layout.cshtml";
+}
+
+@if (@Model["arenaSelected"] == "rocket"){
+<body class="rocketArena">
+  <div class="container arena-character">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="playerImg2">
+          <img src="@Model["character1"].GetImg()">
+        </div>
+        <label for="character1-id">Player 1</label>
+        @Model["character1"].GetName()
+        @if (Model["p1health"] > 0)
+        {
+          <span>Health: @Model["p1health"]</span>
+        }
+        else
+        {
+          <p>Game over!</p>
+        }
+      </div>
+      <div class="col-md-6">
+        <div class="playerImg2">
+          <img src="@Model["character2"].GetImg()">
+        </div>
+        <form class="" action="/attack2" method="post">
+          <label for="character2-id">Player 2</label>
+          @Model["character2"].GetName()
+          @if (Model["p2health"] > 0)
+          {
+            <span>Health: @Model["p2health"]</span>
+          }
+          <input id='character1-id' name='character1-id' type='hidden' value='@Model["character1"].GetId()'>
+          <input id='character2-id' name='character2-id' type='hidden' value='@Model["character2"].GetId()'>
+          <select id="character2Attack" name="character2Attack" type="text">
+            <option selected="selected">Select Attack</option>
+            @foreach(var move2 in @Model["character2"].GetMoves())
+            {
+              <option value='@move2.GetMoveId()'>@move2.GetMoveName()</option>
+            }
+          </select>
+          <button type="submit" id="move2" class="btn">Attack!</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+}
+else if (Model["arenaSelected"] == "mortal")
+{
+  <body class="mortalArena">
+    <div class="container arena-character">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="playerImg2">
+            <img src="@Model["character1"].GetImg()">
+          </div>
+          <label for="character1-id">Player 1</label>
+          @Model["character1"].GetName()
+          @if (Model["p1health"] > 0)
+          {
+            <span>Health: @Model["p1health"]</span>
+          }
+          else
+          {
+            <p>Game over!</p>
+          }
+        </div>
+        <div class="col-md-6">
+          <div class="playerImg2">
+            <img src="@Model["character2"].GetImg()">
+          </div>
+          <form class="" action="/attack2" method="post">
+            <label for="character2-id">Player 2</label>
+            @Model["character2"].GetName()
+            @if (Model["p2health"] > 0)
+            {
+              <span>Health: @Model["p2health"]</span>
+            }
+            <input id='character1-id' name='character1-id' type='hidden' value='@Model["character1"].GetId()'>
+            <input id='character2-id' name='character2-id' type='hidden' value='@Model["character2"].GetId()'>
+            <select id="character2Attack" name="character2Attack" type="text">
+              <option selected="selected">Select Attack</option>
+              @foreach(var move2 in @Model["character2"].GetMoves())
+              {
+                <option value='@move2.GetMoveId()'>@move2.GetMoveName()</option>
+              }
+            </select>
+            <button type="submit" id="move2" class="btn">Attack!</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+}
+else if (Model["arenaSelected"] == "shanghai")
+{
+  <body class="shanghaiArena">
+    <div class="container arena-character">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="playerImg2">
+            <img src="@Model["character1"].GetImg()">
+          </div>
+          <label for="character1-id">Player 1</label>
+          @Model["character1"].GetName()
+          @if (Model["p1health"] > 0)
+          {
+            <span>Health: @Model["p1health"]</span>
+          }
+          else
+          {
+            <p>Game over!</p>
+          }
+        </div>
+        <div class="col-md-6">
+          <div class="playerImg2">
+            <img src="@Model["character2"].GetImg()">
+          </div>
+          <form class="" action="/attack2" method="post">
+            <label for="character2-id">Player 2</label>
+            @Model["character2"].GetName()
+            @if (Model["p2health"] > 0)
+            {
+              <span>Health: @Model["p2health"]</span>
+            }
+            <input id='character1-id' name='character1-id' type='hidden' value='@Model["character1"].GetId()'>
+            <input id='character2-id' name='character2-id' type='hidden' value='@Model["character2"].GetId()'>
+            <select id="character2Attack" name="character2Attack" type="text">
+              <option selected="selected">Select Attack</option>
+              @foreach(var move2 in @Model["character2"].GetMoves())
+              {
+                <option value='@move2.GetMoveId()'>@move2.GetMoveName()</option>
+              }
+            </select>
+            <button type="submit" id="move2" class="btn">Attack!</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+}
+else if (Model["arenaSelected"] == "dbz")
+{
+  <body class="dbzArena">
+    <div class="container arena-character">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="playerImg2">
+            <img src="@Model["character1"].GetImg()">
+          </div>
+          <label for="character1-id">Player 1</label>
+          @Model["character1"].GetName()
+          @if (Model["p1health"] > 0)
+          {
+            <span>Health: @Model["p1health"]</span>
+          }
+          else
+          {
+            <p>Game over!</p>
+          }
+        </div>
+        <div class="col-md-6">
+          <div class="playerImg2">
+            <img src="@Model["character2"].GetImg()">
+          </div>
+          <form class="" action="/attack2" method="post">
+            <label for="character2-id">Player 2</label>
+            @Model["character2"].GetName()
+            @if (Model["p2health"] > 0)
+            {
+              <span>Health: @Model["p2health"]</span>
+            }
+            <input id='character1-id' name='character1-id' type='hidden' value='@Model["character1"].GetId()'>
+            <input id='character2-id' name='character2-id' type='hidden' value='@Model["character2"].GetId()'>
+            <select id="character2Attack" name="character2Attack" type="text">
+              <option selected="selected">Select Attack</option>
+              @foreach(var move2 in @Model["character2"].GetMoves())
+              {
+                <option value='@move2.GetMoveId()'>@move2.GetMoveName()</option>
+              }
+            </select>
+            <button type="submit" id="move2" class="btn">Attack!</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+}

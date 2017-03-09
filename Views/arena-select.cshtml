@@ -1,0 +1,46 @@
+@{
+    Layout="Shared/_Layout.cshtml";
+}
+<form class="" action="/character-select" method="post">
+
+<h1>Select Your Arena!</h1>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="rocket">
+        <h2>Rocket Spot</h2>
+      <img src="../Content/img/rocket.jpg">
+    </div>
+    <input type="radio" name="arenaId" value="rocket">
+  </div>
+
+    <div class="col-md-6">
+      <div class="mortal">
+        <h2>Finish Him!</h2>
+      <img src="../Content/img/mortal.jpg">
+    </div>
+    <input type="radio" name="arenaId" value="mortal">
+  </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="shanghai">
+        <h2>Kings Landing</h2>
+      <img src="../Content/img/shanghai.jpg">
+    </div>
+    <input type="radio" name="arenaId" value="shanghai">
+  </div>
+
+    <div class="col-md-6">
+      <div class="dbz">
+        <h2>Dojo</h2>
+      <img src="../Content/img/dbz.jpg">
+    </div>
+  </div>
+  <input type="radio" name="arenaId" value="dbz">
+  </div>
+
+  <button type="submit" class="btn fight">Select</button>
+</form>

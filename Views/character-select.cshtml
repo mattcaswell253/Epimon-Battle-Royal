@@ -8,7 +8,7 @@
         <span id="character-select">Select Character</span>
         <div class="col-md-11">
           <form class="characters" action="/arena" method="post">
-            @foreach(var character in Model)
+            @foreach(var character in Model["allCharacters"])
             {
               <img src="@character.GetImg()">
               <div class="player-select">
@@ -19,6 +19,7 @@
               <input type="radio" name="character2-id" value="@character.GetId()">
               </div>
             }
+            <input id='arena-id' name='arena-id' type='hidden' value='@Model["selectedArena"]'>
         </div>
         <div class="col-md-1">
           <button type="submit" class="btn fight">Fight!</button>
