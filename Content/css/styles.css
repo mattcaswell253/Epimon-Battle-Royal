@@ -10,13 +10,37 @@
    font-family: 'Press Start 2P';
    background-size: cover;
    background-attachment: fixed;
-   height: 100%;
    color: white;
    background-repeat: no-repeat;
 }
 
+.playerImg1:hover, .playerImg2:hover {
+  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-3px, 0, 0);
+  }
+
+  20%, 80% {
+    transform: translate3d(6px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-12px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(12px, 0, 0);
+  }
+}
+
 img {
-    width: 40%;
+    width: 30%;
 }
 
 #character-select {
@@ -35,10 +59,18 @@ img {
 
 .game-over {
 background-color: black;
+font-family: 'Press Start 2P';
+color: white;
+text-align: center;
+margin-top: 10%;
 }
 
-.continue img {
-    width: 60%;
+.playerImg1 img {
+    width: 90%;
+}
+
+.playerImg2 img {
+    width: 90%;
 }
 
 .continue {
@@ -57,4 +89,10 @@ background-color: black;
   background-size: cover;
   background-attachment: fixed;
   background-repeat: no-repeat;
+}
+
+.fight {
+  float: right;
+  font-size: 3em;
+  color: black;
 }

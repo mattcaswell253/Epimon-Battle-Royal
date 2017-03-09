@@ -9,7 +9,9 @@
       </div>
 
       <div class="col-md-6">
-        <img src="@Model["character1"].GetImg()">
+        <div class="playerImg2">
+          <img src="@Model["character1"].GetImg()">
+        </div>
         <label for="character1-id">Player 1</label>
         @Model["character1"].GetName()
         @if (Model["p1health"] > 0)
@@ -23,7 +25,9 @@
     <div class="row">
 
       <div class="col-md-6">
-        <img src="@Model["character2"].GetImg()">
+        <div class="playerImg2">
+          <img src="@Model["character2"].GetImg()">
+        </div>
         <form class="" action="/attack2" method="post">
           <label for="character2-id">Player 2</label>
           @Model["character2"].GetName()
@@ -40,7 +44,7 @@
               <option value='@move2.GetMoveId()'>@move2.GetMoveName()</option>
             }
           </select>
-          <button type="submit" class="btn">Attack!</button>
+          <button type="submit" id="move2" class="btn">Attack!</button>
         </form>
       </div>
 
