@@ -36,7 +36,7 @@
   }
 }
 
-characters img {
+img {
     width: 30%;
 }
 
@@ -48,10 +48,13 @@ characters img {
 .player-select {
     float: right;
     margin-right: 30%;
+    text-align: right;
+    color: black;
 }
 
 #character-name {
     font-size: 3em;
+    text-align: right;
 }
 
 .game-over {
@@ -78,8 +81,14 @@ margin-top: 10%;
 
 .buttons {
     /*margin-top: 60%;*/
-
     font-family: 'Press Start 2P';
+}
+
+.title {
+  font-size: 10em;
+  text-align: center;
+  font-family: 'Press Start 2P';
+  color: yellow;
 }
 
 .arena {
@@ -94,6 +103,7 @@ margin-top: 10%;
   float: right;
   font-size: 3em;
   color: black;
+  background-color: red;
 }
 
 .arena-character {
@@ -124,5 +134,8 @@ body {
 
 .home-style {
   text-align: center;
-  margin-top: 20%;
+}
+
+.home-style img {
+  width: 50%;
 }
