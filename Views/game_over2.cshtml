@@ -2,11 +2,17 @@
     Layout="Shared/_Layout.cshtml";
 }
 <body class="game-over">
+<<<<<<< HEAD
   <div class="">
       <div class="game-over-color">
           <h1>Player 2 and @Model["character2"].GetName() Wins!</h1>
       </div>
     <img src="@Model["character2"].GetImg2()">
+=======
+  <div class="container">
+    <h1>Player 2 and @Model["character2"].GetName() win!</h1>
+    <span><img src="@Model["character2"].GetImg()"></span>
+>>>>>>> 5a157a5f19208f44ed2918cc4ae4ed7073ff22b9
   </div>
     <div class="continue">
         <a href="/"><img src="/content/img/continue.png" alt=""></a>
