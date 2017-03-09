@@ -5,6 +5,10 @@
    background-repeat: no-repeat;
 }
 
+.game-over-color {
+    color: white;
+}
+
 .character-select {
    background-image: url("/content/img/character-select1.jpg");
    font-family: 'Press Start 2P';
@@ -16,7 +20,7 @@
 }
 
 img {
-    width: 40%;
+    width: 30%;
 }
 
 #character-select {
@@ -49,6 +53,7 @@ background-color: black;
 .buttons {
     margin-top: 60%;
     margin-left: 55%;
+    font-family: 'Press Start 2P';
 }
 
 .arena {

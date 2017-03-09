@@ -62,7 +62,7 @@ namespace Epimon
                 }
                 else
                 {
-                    return View["game_over.cshtml"];
+                    return View["game_over.cshtml", model];
                 }
             };
             // after player 2 attacks, takes you to arena1 for player 1's attack

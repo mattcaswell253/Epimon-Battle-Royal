@@ -3,7 +3,10 @@
 }
 <body class="game-over">
   <div class="">
-    <h1>Player 1 and @Model["character1"].GetName() win!</h1>
+      <div class="game-over-color">
+          <h1>Player 1 and @Model["character1"].GetName() Wins!</h1>
+      </div>
+    <img src="@Model["character1"].GetImg()">
   </div>
     <div class="continue">
         <a href="/"><img src="/content/img/continue.png" alt=""></a>
