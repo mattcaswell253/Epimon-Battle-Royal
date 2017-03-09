@@ -1,30 +1,33 @@
 @{
-    Layout="Shared/_Layout.cshtml";
+  Layout="Shared/_Layout.cshtml";
 }
 
 <body class="character-select">
-    <div class="container">
-      <div class="row">
-        <span id="character-select">Select Character</span>
+  <div class="container">
+    <div class="row">
+      <span id="character-select">Select Character</span>
+    </div>
+
+    <div class="row">
+      <form class="characters" action="/arena" method="post">
         <div class="col-md-11">
-          <form class="characters" action="/arena" method="post">
-            @foreach(var character in Model["allCharacters"])
-            {
-              <img src="@character.GetImg()">
-              <div class="player-select">
-              <div id="character-name">@character.GetName()</div>
-              <label>Player 1</label>
-              <input type="radio" name="character1-id" value="@character.GetId()">
-              <label>Player 2</label>
-              <input type="radio" name="character2-id" value="@character.GetId()">
-              </div>
-            }
-            <input id='arena-id' name='arena-id' type='hidden' value='@Model["selectedArena"]'>
+          @foreach(var character in @Model["allCharacters"])
+          {
+            <img src="@character.GetImg()">
+            <div class="player-select">
+            <div id="character-name">@character.GetName()</div>
+            <label>Player 1</label>
+            <input type="radio" name="character1-id" value="@character.GetId()" required="required">
+            <label>Player 2</label>
+            <input type="radio" name="character2-id" value="@character.GetId()" required="required">
+            </div>
+          }
+          <input id='arena-id' name='arena-id' type='hidden' value='@Model["selectedArena"]'>
         </div>
         <div class="col-md-1">
           <button type="submit" class="btn fight">Fight!</button>
         </div>
-      </div>
-        </form>
+      </form>
     </div>
+  </div>
 </body>
